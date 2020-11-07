@@ -1,7 +1,7 @@
 from flask import Flask, request, jsonify, render_template
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
-from datetime import datetime, timezone
+from datetime import datetime
 
 
 app = Flask(__name__)
@@ -87,8 +87,8 @@ def post_readings(label):
 
 @app.route("/api/readings/<label>", methods=['GET'])
 def get_readings(label):
-    start_time = datetime.fromtimestamp(int(request.args.get('start_time')),timezone.utc)
-    end_time = datetime.fromtimestamp(int(request.args.get('end_time')),timezone.utc)
+   # start_time = datetime.fromtimestamp(int(request.args.get('start_time')),timezone.utc)
+   # end_time = datetime.fromtimestamp(int(request.args.get('end_time')),timezone.utc)
     # qry = DBSession.query(User).filter(User.birthday.between('1985-01-17', '1988-01-17'))
     data = db.session.query(readings).filter(readings.time.between(start_time, end_time)).all()
     print(data)
